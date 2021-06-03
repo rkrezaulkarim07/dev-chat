@@ -2,11 +2,20 @@ import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Input, Button } from 'react-native-elements';
 
-const LoginScreen = ({navigation}) => {
+const RegisterScreen = () => {
     const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [imageURl, setImageUrl] = useState('');
     return (
         <View style={styles.container}>
+            <Input
+                placeholder="Enter your name"
+                label="Name"
+                leftIcon={{ type: 'material', name: 'badge' }}
+                value={name}
+                onChange={text => setName(text)}
+            />
             <Input
                 placeholder="Enter your email"
                 label="Email"
@@ -22,14 +31,20 @@ const LoginScreen = ({navigation}) => {
                 onChange={text => setPassword(text)}
                 secureTextEntry
             />
-
-            <Button title="Sign in" style={styles.button} />
-            <Button class="registerButton" title="Register" style={styles.button} onPress={() => navigation.navigate('Register')} />
+            <Input
+                placeholder="Enter your image Url"
+                label="Profile Picture"
+                leftIcon={{ type: 'material', name: 'face' }}
+                value={imageURl}
+                onChange={text => setImageUrl(text)}
+            />
+            
+            <Button class="registerButton" title="Register" style={styles.button} />
         </View>
     )
 }
 
-export default LoginScreen
+export default RegisterScreen 
 
 const styles = StyleSheet.create({
     button: {
