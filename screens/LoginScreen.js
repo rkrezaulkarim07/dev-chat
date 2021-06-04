@@ -20,6 +20,8 @@ const LoginScreen = ({ navigation }) => {
         const unsubscribe = auth.onAuthStateChanged(function(user) {
             if (user) {
               navigation.replace('Chat');
+            // navigation.replace('Login');
+            
             } else {
 
                 navigation.canGoBack() && 
@@ -49,6 +51,7 @@ const LoginScreen = ({ navigation }) => {
             />
 
             <Button title="Sign in" onPress={signIn} style={styles.button} />
+            {/* <Button title="Register" style={styles.button} onPress={() => navigation.navigate('Register')} /> */}
             <Button title="Register" style={styles.button} onPress={() => navigation.navigate('Register')} />
         </View>
     )

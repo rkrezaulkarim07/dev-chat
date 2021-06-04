@@ -13,6 +13,7 @@ const RegisterScreen = ({navigation}) => {
         auth.createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in 
+                
                 const user = userCredential.user;
 
                 user.updateProfile({
