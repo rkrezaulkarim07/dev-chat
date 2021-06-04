@@ -19,11 +19,8 @@ const LoginScreen = ({ navigation }) => {
     useEffect(()=>{
         const unsubscribe = auth.onAuthStateChanged(function(user) {
             if (user) {
-              navigation.replace('Chat');
-            // navigation.replace('Login');
-            
+              navigation.replace('Chat');            
             } else {
-
                 navigation.canGoBack() && 
                 navigation.popToTop();
               // No user is signed in.
@@ -51,7 +48,6 @@ const LoginScreen = ({ navigation }) => {
             />
 
             <Button title="Sign in" onPress={signIn} style={styles.button} />
-            {/* <Button title="Register" style={styles.button} onPress={() => navigation.navigate('Register')} /> */}
             <Button title="Register" style={styles.button} onPress={() => navigation.navigate('Register')} />
         </View>
     )
@@ -63,8 +59,6 @@ const styles = StyleSheet.create({
     button: {
         width: 200,
         marginTop: 10,
-
-
     },
 
     container: {
