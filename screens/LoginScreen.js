@@ -3,8 +3,8 @@ import { View, StyleSheet } from 'react-native'
 import { Input, Button } from 'react-native-elements';
 
 const LoginScreen = ({navigation}) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState("");
     return (
         <View style={styles.container}>
             <Input
@@ -12,19 +12,19 @@ const LoginScreen = ({navigation}) => {
                 label="Email"
                 leftIcon={{ type: 'material', name: 'email' }}
                 value={email}
-                onChange={text => setEmail(text)}
+                onChangeText={text => setEmail(text)}
             />
             <Input
                 placeholder="Enter your password"
                 label="password"
                 leftIcon={{ type: 'material', name: 'lock' }}
                 value={password}
-                onChange={text => setPassword(text)}
+                onChangeText={text => setPassword(text)}
                 secureTextEntry
             />
 
             <Button title="Sign in" style={styles.button} />
-            <Button class="registerButton" title="Register" style={styles.button} onPress={() => navigation.navigate('Register')} />
+            <Button title="Register" style={styles.button} onPress={() => navigation.navigate('Register')} />
         </View>
     )
 }

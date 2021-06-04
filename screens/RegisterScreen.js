@@ -37,21 +37,21 @@ const RegisterScreen = () => {
                 label="Name"
                 leftIcon={{ type: 'material', name: 'badge' }}
                 value={name}
-                onChange={text => setName(text)}
+                onChangeText={text => setName(text)}
             />
             <Input
                 placeholder="Enter your email"
                 label="Email"
                 leftIcon={{ type: 'material', name: 'email' }}
                 value={email}
-                onChange={text => setEmail(text)}
+                onChangeText={text => setEmail(text)}
             />
             <Input
                 placeholder="Enter your password"
                 label="password"
                 leftIcon={{ type: 'material', name: 'lock' }}
                 value={password}
-                onChange={text => setPassword(text)}
+                onChangeText={text => setPassword(text)}
                 secureTextEntry
             />
             <Input
@@ -59,10 +59,10 @@ const RegisterScreen = () => {
                 label="Profile Picture"
                 leftIcon={{ type: 'material', name: 'face' }}
                 value={imageURL}
-                onChange={text => setImageUrL(text)}
+                onChangeText={text => setImageUrL(text)}
             />
 
-            <Button class="registerButton" title="Register" style={styles.button} />
+            <Button onPress={register} title="Register" style={styles.button} />
         </View>
     )
 }
