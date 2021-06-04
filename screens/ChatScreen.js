@@ -1,11 +1,62 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect ,useState , useCallback,useEffect} from 'react'
 import { View, Text, Touchable } from 'react-native'
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements/dist/avatar/Avatar';
+import {GiftedChat} from 'react-native-gifted-chat'
 
 const ChatScreen = ({ navigation }) => {
+
+    const [messages, setMessages] = useState([]);
+
+    // useEffect(() => {
+    //     setMessages([
+    //       {
+    //         _id: 1,
+    //         text: 'Hello developer',
+    //         createdAt: new Date(),
+    //         user: {
+    //           _id: 2,
+    //           name: 'React Native',
+    //           avatar: 'https://placeimg.com/140/140/any',
+    //         },
+    //       },
+    //     ])
+    //   }, [])
+
+
+    useLayoutEffect(() => {
+        const unsubscribe = db.collection('chats').orderBy('createdAt' , 'desc').onSnapshot(snapshot=>setMessages(
+            snapshot.docs.map(doc=> ({
+                _id:doc.data()._id,
+                createdAt:doc.data().createdAt.toDate(),
+                text:doc.data().text,
+                user:doc.data().user,
+            }))
+        ))
+
+        return unsubscribe;
+        
+    }, [])
+    
+      const onSend = useCallback((messages = []) => {
+        setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+        const {
+            _id,
+            createdAt,
+            text,
+            user
+        }=messages[0]
+        db.collection('chats').add({
+            _id,
+            createdAt,
+            text,
+            user
+        })
+      }, [])
+
+
     useLayoutEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
@@ -41,9 +92,16 @@ const ChatScreen = ({ navigation }) => {
     }
 
     return (
-        <View>
-            <Text>Chat Screen</Text>
-        </View>
+        <GiftedChat
+            messages={messages}
+            showAvatarForEveryMessage= {true}
+            onSend={messages => onSend(messages)}
+            user={{
+            _id: auth.currentUser?.email,
+            name:auth?.currentUser?.displayName, 
+            avatar: auth?.currentUser?.photoURL
+      }}
+    />
     )
 }
 
