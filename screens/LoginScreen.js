@@ -6,6 +6,16 @@ import { auth } from '../firebase';
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const signIn =() =>{
+        auth.signInWithEmailAndPassword(email, password)
+
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert(errorMessage)
+  });
+    }
+
     useEffect(()=>{
         const unsubscribe = auth.onAuthStateChanged(function(user) {
             if (user) {
@@ -35,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
                 secureTextEntry
             />
 
-            <Button title="Sign in" style={styles.button} />
+            <Button title="Sign in" onPress={signIn} style={styles.button} />
             <Button title="Register" style={styles.button} onPress={() => navigation.navigate('Register')} />
         </View>
     )
