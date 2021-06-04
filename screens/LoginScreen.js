@@ -1,10 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Input, Button } from 'react-native-elements';
+import { auth } from '../firebase';
 
-const LoginScreen = ({navigation}) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const LoginScreen = ({ navigation }) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const signIn =() =>{
+        auth.signInWithEmailAndPassword(email, password)
+
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert(errorMessage)
+  });
+    }
+
+    useEffect(()=>{
+        const unsubscribe = auth.onAuthStateChanged(function(user) {
+            if (user) {
+              navigation.replace('Chat');
+            } else {
+              // No user is signed in.
+            }
+          });  
+          return unsubscribe;        
+    }, [])
+
     return (
         <View style={styles.container}>
             <Input
@@ -12,19 +34,19 @@ const LoginScreen = ({navigation}) => {
                 label="Email"
                 leftIcon={{ type: 'material', name: 'email' }}
                 value={email}
-                onChange={text => setEmail(text)}
+                onChangeText={text => setEmail(text)}
             />
             <Input
                 placeholder="Enter your password"
                 label="password"
                 leftIcon={{ type: 'material', name: 'lock' }}
                 value={password}
-                onChange={text => setPassword(text)}
+                onChangeText={text => setPassword(text)}
                 secureTextEntry
             />
 
-            <Button title="Sign in" style={styles.button} />
-            <Button class="registerButton" title="Register" style={styles.button} onPress={() => navigation.navigate('Register')} />
+            <Button title="Sign in" onPress={signIn} style={styles.button} />
+            <Button title="Register" style={styles.button} onPress={() => navigation.navigate('Register')} />
         </View>
     )
 }
@@ -35,8 +57,8 @@ const styles = StyleSheet.create({
     button: {
         width: 200,
         marginTop: 10,
-        
-        
+
+
     },
 
     container: {
