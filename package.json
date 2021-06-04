@@ -17,6 +17,10 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+<<<<<<< HEAD
+=======
+    "react-native-elements": "^3.4.1",
+>>>>>>> development
     "react-native-gesture-handler": "~1.10.2",
     "react-native-gifted-chat": "^0.16.3",
     "react-native-reanimated": "~2.1.0",
