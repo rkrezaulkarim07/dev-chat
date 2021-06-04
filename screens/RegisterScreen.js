@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import { Input, Button } from 'react-native-elements';
 import { auth } from '../firebase';
 
-const RegisterScreen = () => {
+const RegisterScreen = ({nevigation}) => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -23,6 +23,8 @@ const RegisterScreen = () => {
                 }).catch(function (error) {
                     // An error happened.
                 });
+
+                nevigation.popTotop();
             })
             .catch((error) => {
                 const errorMessage = error.message;
