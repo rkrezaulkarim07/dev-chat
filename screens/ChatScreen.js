@@ -1,9 +1,10 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect ,useState , useCallback,useEffect} from 'react'
 import { View, Text, Touchable } from 'react-native'
 import { auth } from '../firebase';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements/dist/avatar/Avatar';
+import {GiftedChat} from 'react-native-gifted-chat'
 
 const ChatScreen = ({ navigation }) => {
     useLayoutEffect(() => {
