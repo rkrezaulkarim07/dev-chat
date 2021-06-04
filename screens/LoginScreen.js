@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Input, Button } from 'react-native-elements';
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState("");
     return (
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     button: {
         width: 200,
         marginTop: 10,
-        
-        
+
+
     },
 
     container: {
